@@ -1,11 +1,25 @@
-const { model, Schema } = require('mongoose')
+const {
+  model,
+  Schema
+} = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
+const validTypes = {
+  values: [
+    'Frutas y verduras',
+    'Carnes rojas y blancas',
+    'Pescadería',
+    'Panificados y pastelería',
+    'Bebidas alcoholicas',
+    'Cafeteria',
+    'Comida rapida',
+    'Snacks',
+    'Bebidas sin alcohol'
+  ],
+  message: '{VALUE} no es un rubro válido'
+}
+
 const productCategorySchema = new Schema({
-  id: {
-    type: Number,
-    unique: true
-  },
   code: {
     type: String,
     required: [true, 'El codigo es obligatorio']
@@ -15,14 +29,6 @@ const productCategorySchema = new Schema({
     required: [true, 'El nombre es obligatorio']
   }
 })
-
-productCategorySchema.methods.toJSON = function () {
-  let productCategory = this
-  let productCategoryObject = productCategory.toObject()
-  delete productCategoryObject.__v
-
-  return productCategoryObject
-}
 
 productCategorySchema.plugin(uniqueValidator, {
   message: '{PATH} debe de ser único'

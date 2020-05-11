@@ -1,5 +1,5 @@
 {
-    "name": "realml-be",
+    "name": "abastify-be",
     "version": "1.0.0",
     "description": "NodeJS + MongoDB API",
     "scripts": {
