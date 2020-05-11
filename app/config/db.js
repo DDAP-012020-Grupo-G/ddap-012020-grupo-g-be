@@ -5,16 +5,13 @@ let urlDB = 'mongodb://localhost:27017/realml-be'
 if (process.env.NODE_ENV === 'dev') {
   urlDB = 'mongodb://localhost:27017/realml-be'
 } else {
-  urlDB =
-    'here write the mongo connection with mongo atlas and other type of connection mode'
+  urlDB = process.env.MONGODB_URI
 }
-
-process.env.DB_URI = urlDB
 
 module.exports.connect = () => {
   return new Promise((resolve, reject) => {
     mongoose
-      .connect(process.env.DB_URI, {
+      .connect(urlDB, {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true
