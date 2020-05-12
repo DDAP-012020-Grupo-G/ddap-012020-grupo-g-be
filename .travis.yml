@@ -2,7 +2,9 @@ language: node_js
 node_js: node
 before_install: 
 install:
-- npm install
+  - npm install
+script: 
+  - npm run test-with-coverage
 deploy:
   provider: heroku
   api_key:
