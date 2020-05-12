@@ -4,7 +4,10 @@ before_install:
 install:
   - npm install
 script: 
-  - npm run test-with-coverage
+  - npm run test
+  - npm run coverage-report
+  - npm run send-report-to-codacy
+  - npm run delete-test-and-report-folders
 deploy:
   provider: heroku
   api_key:

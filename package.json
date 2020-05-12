@@ -8,7 +8,9 @@
         "test": "nyc mocha ./tests --recursive --timeout 60000",
         "test-dev": "nodemon --exec 'nyc mocha ./tests --recursive --timeout 60000'",
         "coverage": "nyc report",
-        "test-with-coverage": "nyc --reporter=lcov mocha ./tests --recursive --timeout 60000 && cat ./coverage/lcov.info | codacy-coverage && rm -rf ./coverage && rm -rf ./nyc_output"
+        "coverage-report": "echo 'Creating coverage report...' && nyc report --reporter=lcov",
+        "send-report-to-codacy": "bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Javascript -r coverage/lcov.info",
+        "delete-test-and-report-folders": "rm -rf ./coverage && rm -rf ./nyc_output"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
