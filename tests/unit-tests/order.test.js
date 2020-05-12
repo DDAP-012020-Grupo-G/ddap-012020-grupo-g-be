@@ -8,9 +8,10 @@ const Shop = require('../../app/models/shop.model')
 const ShopCategory = require('../../app/models/shopCategory.model')
 const Product = require('../../app/models/product.model')
 const ProductCategory = require('../../app/models/productCategory.model')
+const Order = require('../../app/models/order.model')
 
-describe('New product', () => {
-    it('should create a product', (done) => {
+describe('New order', () => {
+    it('should create an order', (done) => {
         const user = new User({
             email: "user@gmail.com",
             password: "asdasd"
@@ -48,10 +49,10 @@ describe('New product', () => {
 
         const shop = new Shop({
             profile_id: profile._id,
-            name: 'McDonalds',
+            name: 'Maxiconsumo',
             phoneNbr: '1134343434',
-            email: 'mcdonalds@gmail.com',
-            picUrl: 'http://mcdonalds.com/logo',
+            email: 'maxiconsumo@gmail.com',
+            picUrl: 'http://maxiconsumo.com/logo',
             geo_id: shopGeo._id,
             shop_category_id: shopCategory._id,
             timeSchedule: {
@@ -77,24 +78,22 @@ describe('New product', () => {
             product_category_id: productCategory._id
         })
 
-        expect(product.toJSON()).to.be.an('object')
+        const order = new Order({
+            profile_id: profile._id,
+            cart: {
+                product_id: product._id,
+                quantity: 5
+            },
+            price: 250
+        })
 
-        expect(product).to.contain.property('_id')
-        expect(product).to.contain.property('name')
-        expect(product).to.contain.property('brand')
-        expect(product).to.contain.property('stock')
-        expect(product).to.contain.property('price')
-        expect(product).to.contain.property('picUrl')
-        expect(product).to.contain.property('product_category_id')
+    expect(order.toJSON()).to.be.an('object')
 
-        expect(product.name).to.be.equal('porotos')
-        expect(product.brand).to.be.equal('Marolio')
-        expect(product.stock).to.be.equal(40)
-        expect(product.price).to.be.equal(50)
-        expect(product.picUrl).to.be.equal('http://marolio.com/porotos')
+    expect(order).to.contain.property('_id')
+    expect(order).to.contain.property('profile_id')
+    expect(order).to.contain.property('cart')
+    expect(order).to.contain.property('price')
 
-        expect(product.product_category_id).to.be.equal(productCategory._id)
-
-        done()
+    done()
     })
 })

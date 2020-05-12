@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
+const { model, Schema } = require('mongoose')
 
-const profileSchema = new mongoose.Schema({
+const profileSchema = new Schema({
   user_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: [true, 'El userId es obligatorio'],
+    type: Schema.Types.ObjectId,
+    required: [true, 'El id del usuario es obligatorio'],
     ref: 'User'
   },
   firstName: {
@@ -16,7 +16,7 @@ const profileSchema = new mongoose.Schema({
     type: String
   },
   geo_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Geo'
   },
   picUrl: {
@@ -24,4 +24,4 @@ const profileSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Profile', profileSchema)
+module.exports = model('Profile', profileSchema)
