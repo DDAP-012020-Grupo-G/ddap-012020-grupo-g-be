@@ -1,5 +1,6 @@
 const { expect } = require('chai')
 const { before, after, describe, it, equal, to } = require('mocha')
+
 const User = require ('../../app/models/user.model')
 const ShopCategory = require('../../app/models/shopCategory.model')
 const Geo = require ('../../app/models/geo.model')
@@ -49,7 +50,7 @@ describe('New shop promotion', () => {
     const shop = new Shop({
         profile_id: profile._id,
         name: 'McDonalds',
-        phoneNbr: 1134343434,
+        phoneNbr: '1134343434',
         email: 'mcdonalds@gmail.com',
         picUrl: 'http://mcdonalds.com/logo',
         geo_id: shopGeo._id,

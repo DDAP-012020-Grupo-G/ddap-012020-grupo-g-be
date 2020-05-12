@@ -1,10 +1,9 @@
 const { model, Schema } = require('mongoose')
-const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator')
+const Product = require('./product.model')
 
 const orderSchema = new Schema({
   profile_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Profile'
   },
   price: {
@@ -16,18 +15,6 @@ const orderSchema = new Schema({
     default: []
   }
 })
-
-orderSchema.methods.toJSON = function () {
-    let order = this
-    let orderObject = order.toObject()
-    delete orderObject.__v
   
-    return orderObject
-  }
-  
-  orderSchema.plugin(uniqueValidator, {
-    message: '{PATH} debe de ser único'
-  })
-  
-  module.exports = model('order', orderSchema)
+module.exports = model('order', orderSchema)
   

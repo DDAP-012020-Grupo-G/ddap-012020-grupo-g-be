@@ -1,14 +1,5 @@
-const {
-    expect
-} = require('chai')
-const {
-    before,
-    after,
-    describe,
-    it,
-    equal,
-    to
-} = require('mocha')
+const { expect } = require('chai')
+const { before, after, describe, it, equal, to } = require('mocha')
 
 const User = require('../../app/models/user.model')
 const Profile = require('../../app/models/profile.model')
@@ -59,7 +50,7 @@ describe('New order', () => {
         const shop = new Shop({
             profile_id: profile._id,
             name: 'Maxiconsumo',
-            phoneNbr: 1134343434,
+            phoneNbr: '1134343434',
             email: 'maxiconsumo@gmail.com',
             picUrl: 'http://maxiconsumo.com/logo',
             geo_id: shopGeo._id,
@@ -103,16 +94,6 @@ describe('New order', () => {
     expect(order).to.contain.property('cart')
     expect(order).to.contain.property('price')
 
-
-    // expect(shop.name).to.be.equal('McDonalds')
-    // expect(shop.phoneNbr).to.be.equal(1134343434)
-    // expect(shop.email).to.be.equal('mcdonalds@gmail.com')
-    // expect(shop.geo_id).to.be.equal(shopGeo._id)
-    // expect(shop.picUrl).to.be.equal('http://mcdonalds.com/logo')
-    // expect(shop.shop_category_id).to.be.equal(shopCategory._id)
-    // expect(shop.timeSchedule.day).to.be.equal('Lunes a viernes')
-    // expect(shop.timeSchedule.openAt).to.be.equal('9:00 a 21:00')
-    // expect(shop.delivery.active).to.be.true
     done()
     })
 })

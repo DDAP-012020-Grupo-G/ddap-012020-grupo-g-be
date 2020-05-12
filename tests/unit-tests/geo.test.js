@@ -1,12 +1,5 @@
-const {
-  expect
-} = require('chai')
-const {
-  describe,
-  it,
-  equal,
-  to
-} = require('mocha')
+const { expect } = require('chai')
+const { describe, it, equal, to } = require('mocha')
 
 const Geo = require('../../app/models/geo.model')
 

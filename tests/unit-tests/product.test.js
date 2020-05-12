@@ -1,14 +1,5 @@
-const {
-    expect
-} = require('chai')
-const {
-    before,
-    after,
-    describe,
-    it,
-    equal,
-    to
-} = require('mocha')
+const { expect } = require('chai')
+const { before, after, describe, it, equal, to } = require('mocha')
 
 const User = require('../../app/models/user.model')
 const Profile = require('../../app/models/profile.model')
@@ -58,7 +49,7 @@ describe('New product', () => {
         const shop = new Shop({
             profile_id: profile._id,
             name: 'McDonalds',
-            phoneNbr: 1134343434,
+            phoneNbr: '1134343434',
             email: 'mcdonalds@gmail.com',
             picUrl: 'http://mcdonalds.com/logo',
             geo_id: shopGeo._id,

@@ -1,27 +1,10 @@
-const {
-  model,
-  Schema
-} = require('mongoose')
+const { model, Schema } = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
-
-const validTypes = {
-  values: [
-    'Frutas y verduras',
-    'Carnes rojas y blancas',
-    'Pescadería',
-    'Panificados y pastelería',
-    'Bebidas alcoholicas',
-    'Cafeteria',
-    'Comida rapida',
-    'Snacks',
-    'Bebidas sin alcohol'
-  ],
-  message: '{VALUE} no es un rubro válido'
-}
 
 const productCategorySchema = new Schema({
   code: {
     type: String,
+    unique: true,
     required: [true, 'El codigo es obligatorio']
   },
   name: {
