@@ -1,0 +1,28 @@
+---------------------------------------------------------------------
+TAG v1.0
+---------------------------------------------------------------------
+NEW FEATURES:
+[Backend]
+  * Modelos de:
+    - User
+    - Geo
+    - Profile
+    - Profile Settings
+    - Shop
+    - Shop Category
+    - Shop Promotion
+    - Product
+    - Product Category
+    - Order
+[Frontend]
+  * Pantalla de Home con Mapa
+
+NOTES:
+[Backend]
+  * Todavía no definimos la parte de los turnos, por el momento el modelo Shop tendria
+    un array de horarios del tipo String ej "Lunes: 8:00 a 18:00"
+  * Coverage en Codacy
+
+KNOWN ISSUES:
+[Backend]
+  * Unit tests sin Factory
