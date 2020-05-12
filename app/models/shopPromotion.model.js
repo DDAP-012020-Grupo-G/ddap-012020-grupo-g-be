@@ -21,10 +21,6 @@ const shopPromotionSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Shop'
   },
-  id: {
-    type: Number,
-    unique: true
-  },
   title: {
     type: String,
     required: [true, 'El nombre es obligatorio']
