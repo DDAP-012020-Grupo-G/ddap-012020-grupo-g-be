@@ -1,7 +1,19 @@
-
-[![pipeline status](https://gitlab.com/h3adHunter/ddap-012020-grupo-g-be/badges/master/pipeline.svg)](https://gitlab.com/h3adHunter/ddap-012020-grupo-g-be/-/commits/master) [![coverage report](https://gitlab.com/h3adHunter/ddap-012020-grupo-g-be/badges/master/coverage.svg)](https://gitlab.com/h3adHunter/ddap-012020-grupo-g-be/-/commits/master)
 ## Back-end (Node.js / Express)
 ###### Grupo G DDAP 01/2020
+
+### Links útiles
+##### Front-end
+[Repositorio](https://github.com/h3adHunter/ddap-012020-grupo-g-fe)
+[Travis CI](https://travis-ci.org/github/h3adHunter/ddap-012020-grupo-g-fe)
+[Codacy](https://app.codacy.com/manual/juanmanuelbaez1994/ddap-012020-grupo-g-fe/dashboard)
+[Heroku](https://abastify-fe.herokuapp.com)
+##### Back-end
+[Repositorio](https://github.com/h3adHunter/ddap-012020-grupo-g-be)
+[Travis CI](https://travis-ci.org/github/h3adHunter/ddap-012020-grupo-g-be)
+[Codacy](https://app.codacy.com/manual/juanmanuelbaez1994/ddap-012020-grupo-g-be/dashboard)
+[Heroku](https://abastify-be.herokuapp.com)
+
+
 ---
 ### Instalación
 
