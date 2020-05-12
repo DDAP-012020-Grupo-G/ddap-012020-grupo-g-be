@@ -2,7 +2,14 @@ language: node_js
 node_js: node
 before_install: 
 install:
-- npm install
+  - npm install
+script: 
+  - npm run test
+  - npm run coverage-report
+after_script:
+  - sudo apt-get -y bash curl glibc
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Javascript -r coverage/lcov.info
+  - rm -rf ./coverage && rm -rf ./nyc_output
 deploy:
   provider: heroku
   api_key:
