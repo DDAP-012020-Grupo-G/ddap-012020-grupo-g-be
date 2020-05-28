@@ -1,33 +1,19 @@
 const { expect } = require('chai')
 const { before, after, describe, it, equal, to } = require('mocha')
 
-const User = require('../../app/models/user.model')
-const Profile = require('../../app/models/profile.model')
-const Geo = require('../../app/models/geo.model')
+const User = require('../factories/user.factory')
+const Profile = require('../factories/profile.factory')
+const Geo = require('../factories/geo.factory')
 
 describe('New profile', () => {
 	it('should create a profile', (done) => {
-    const user = new User({
-      email: "user@gmail.com",
-      password: "asdasd"
-    })
-
-    const geo = new Geo({
-      address: 'Calle falsa 123',
-      type: 'CUSTOMER',
-      coordinates: [-30, -54]
-    })
-
-    const profile = new Profile({
+    const user = User.build()
+    const geo = Geo.build()
+    const profile = Profile.build({
       user_id: user._id,
-      geo_id: geo._id,
-      firstName: 'Usuario',
-      lastName: 'Común',
-      picUrl: 'http://url.com/123'
+      geo_id: geo._id
     })
-
-    expect(profile).to.be.an('object')
-
+   
     expect(profile).to.contain.property('_id')
     expect(profile).to.contain.property('user_id')
     expect(profile).to.contain.property('geo_id')

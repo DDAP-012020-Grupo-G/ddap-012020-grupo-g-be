@@ -17,14 +17,6 @@ const profileSettingsSchema = new Schema({
   }
 })
 
-profileSettingsSchema.methods.toJSON = function () {
-  let profileSettings = this
-  let profileSettingsObject = profileSettings.toObject()
-  delete profileSettingsObject.__v
-
-  return profileSettingsObject
-}
-
 profileSettingsSchema.plugin(uniqueValidator, {
   message: '{PATH} debe de ser único'
 })
