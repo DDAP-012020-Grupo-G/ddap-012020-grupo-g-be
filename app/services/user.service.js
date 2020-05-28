@@ -35,9 +35,13 @@ async function getById(id) {
   return await User.findById(id).select('-hash')
 }
 
+async function existsUserWithEmail(email) {
+  return await User.findOne({ email })
+}
+
 async function create(userParam) {
   // validate
-  if (await User.findOne({ email: userParam.email })) {
+  if (await this.existsUserWithEmail(userParam.email)) {
     throw 'El email [' + userParam.email + '] ya existe'
   }
 
@@ -52,9 +56,14 @@ async function create(userParam) {
     user.hash = bcrypt.hashSync(userParam.password, 10)
   }
 
-  // save user
   await user.save()
-  await profileService.create(user.id)
+
+  await profileService.create({
+    user_id: user.id,
+    firstName: userParam.firstName,
+    lastName: userParam.lastName
+  })
+
   return user
 }
 
@@ -63,10 +72,7 @@ async function update(id, userParam) {
 
   // validate
   if (!user) throw 'Usuario no encontrado'
-  if (
-    user.email !== userParam.email &&
-    (await User.findOne({ email: userParam.email }))
-  ) {
+  if (user.email !== userParam.email && (await this.existsUserWithEmail(userParam.email))) {
     throw 'El email [' + userParam.email + '] ya existe'
   }
 
