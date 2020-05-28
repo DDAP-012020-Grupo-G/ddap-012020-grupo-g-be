@@ -1,6 +1,7 @@
 const Factory = require('rosie').Factory;
+const ShopPromotionModel = require('../../app/models/shopPromotion.model')
 
-const ShopPromotion = new Factory()
+const ShopPromotion = Factory.define('shopPromotion', ShopPromotionModel)
     .sequence('_id')
     .attrs({
         shop_id: 1,

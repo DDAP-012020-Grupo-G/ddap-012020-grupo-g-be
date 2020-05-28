@@ -1,6 +1,8 @@
 const Factory = require('rosie').Factory;
- 
-const Product = new Factory()
+
+const ProductModel = require('../../app/models/product.model')
+
+const Product = Factory.define('product', ProductModel)
     .sequence('_id')
     .attrs({
         shop_id: 1,

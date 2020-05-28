@@ -1,6 +1,7 @@
 const Factory = require('rosie').Factory;
+const ProfileSettingsModel = require('../../app/models/profileSettings.model')
 
-const ProfileSettings = new Factory()
+const ProfileSettings = Factory.define('profileSettings', ProfileSettingsModel)
     .sequence('_id')
     .attrs({
         profile_id: 1,

@@ -19,7 +19,6 @@ describe('New profile settings', () => {
     expect(profileSettings).to.contain.property('profile_id')
     expect(profileSettings).to.contain.property('thresholds')
     expect(profileSettings).to.contain.property('savedCarts')
-    expect(profileSettings).to.contain.property('asdasd')
     done()
   })
 })

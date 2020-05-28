@@ -41,9 +41,9 @@ describe('New shop', () => {
     expect(shop.geo_id).to.be.equal(shopGeo._id)
     expect(shop.picUrl).to.be.equal('http://mcdonalds.com/logo')
     expect(shop.shop_category_id).to.be.equal(shopCategory._id)
-    expect(shop.timeSchedule.day).to.be.equal('Lunes a viernes')
-    expect(shop.timeSchedule.openAt).to.be.equal('9:00 a 21:00')
-    expect(shop.delivery.active).to.be.true
+    expect(shop.timeSchedule[0].day).to.be.equal('Lunes a viernes')
+    expect(shop.timeSchedule[0].openAt).to.be.equal('9:00 a 21:00')
+    expect(shop.delivery.enabled).to.be.equal(false)
     done()
     })
 })

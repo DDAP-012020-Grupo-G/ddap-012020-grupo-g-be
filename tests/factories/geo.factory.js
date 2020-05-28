@@ -1,6 +1,8 @@
 const Factory = require('rosie').Factory;
- 
-const Geo = new Factory()
+
+const GeoModel = require('../../app/models/geo.model')
+
+const Geo = Factory.define('geo', GeoModel)
     .sequence('_id')
     .attrs({
         address: 'Calle falsa 123',

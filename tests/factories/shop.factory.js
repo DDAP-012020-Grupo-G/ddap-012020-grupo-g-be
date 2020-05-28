@@ -1,6 +1,8 @@
 const Factory = require('rosie').Factory;
 
-const Shop = new Factory()
+const ShopModel = require('../../app/models/shop.model')
+
+const Shop = Factory.define('shop', ShopModel)
     .sequence('_id')
     .attrs({  
         profile_id: 1,
@@ -8,15 +10,15 @@ const Shop = new Factory()
         phoneNbr: '1134343434',
         email: 'mcdonalds@gmail.com',
         picUrl: 'http://mcdonalds.com/logo',
-        geo_id: 1,
+        Shop_id: 1,
         shop_category_id: 1,
-        timeSchedule: {
+        timeSchedule: [{
             day: 'Lunes a viernes',
             openAt: '9:00 a 21:00'
-        },
-        paymentMethods: {
+        }],
+        paymentMethods: [{
             type: 'Efectivo'
-        },
+        }],
         delivery: {
             active: true,
             maxRange: 5
