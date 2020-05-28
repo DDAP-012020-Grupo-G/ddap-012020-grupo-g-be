@@ -1,17 +1,14 @@
 const { expect } = require('chai')
 const { before, after, describe, it, equal, to } = require('mocha')
 
-const ProductCategory = require('../../app/models/productCategory.model')
+const ProductCategory = require('../factories/product.category.factory')
 
 describe('New product category', () => {
 	it('should create a product category', (done) => {
 
-    const productCategory = new ProductCategory({
-        code: 'LGM',
-        name: 'Legumbres'
-    })
+    const productCategory = ProductCategory.build()
 
-    expect(productCategory.toJSON()).to.be.an('object')
+    expect(productCategory).to.be.an('object')
 
     expect(productCategory).to.contain.property('_id')
     expect(productCategory).to.contain.property('name')
