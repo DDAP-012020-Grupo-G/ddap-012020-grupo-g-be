@@ -25,7 +25,8 @@
         "mongodb": "^3.2.7",
         "mongoose": "^5.8.10",
         "mongoose-unique-validator": "^2.0.3",
-        "rootpath": "^0.1.2"
+        "rootpath": "^0.1.2",
+        "rosie": "^2.0.1"
     },
     "devDependencies": {
         "chai": "^4.2.0",

@@ -1,66 +1,27 @@
 const { expect } = require('chai')
 const { before, after, describe, it, equal, to } = require('mocha')
 
-const User = require('../../app/models/user.model')
-const Profile = require('../../app/models/profile.model')
-const Geo = require('../../app/models/geo.model')
-const Shop = require('../../app/models/shop.model')
-const ShopCategory = require('../../app/models/shopCategory.model')
+const Profile = require('../factories/profile.factory')
+const Geo = require('../factories/geo.factory')
+const Shop = require('../factories/shop.factory')
+const ShopCategory = require('../factories/shop.category.factory')
 
 describe('New shop', () => {
 	it('should create a shop', (done) => {
-    const user = new User({
-      email: "user@gmail.com",
-      password: "asdasd"
-    })
+    
+    const shopGeo = Geo.build()
 
-    const geo = new Geo({
-      address: 'Calle falsa 123',
-      type: 'CUSTOMER',
-      coordinates: [-30, -54]
-    })
+    const shopCategory = ShopCategory.build()
 
-    const shopGeo = new Geo({
-        address: 'Mitre 100',
-        type: 'SHOP',
-        coordinates: [50, 42]
-    })
+    const profile = Profile.build()
 
-    const shopCategory = new ShopCategory({
-        code: 'FFD',
-        name: 'Comida rapida'
-    })
-
-    const profile = new Profile({
-      user_id: user._id,
-      geo_id: geo._id,
-      firstName: 'Usuario',
-      lastName: 'Común',
-      picUrl: 'http://url.com/123'
-    })
-
-    const shop = new Shop({
-        profile_id: profile._id,
-        name: 'McDonalds',
-        phoneNbr: '1134343434',
-        email: 'mcdonalds@gmail.com',
-        picUrl: 'http://mcdonalds.com/logo',
-        geo_id: shopGeo._id,
+    const shop = Shop.build({
         shop_category_id: shopCategory._id,
-        timeSchedule: {
-            day: 'Lunes a viernes',
-            openAt: '9:00 a 21:00'
-        },
-        paymentMethods: {
-            type: 'Efectivo'
-        },
-        delivery: {
-            active: true,
-            maxRange: 5
-        }
+        geo_id: shopGeo._id,
+        profile_id: profile._id
     })
 
-    expect(shop.toJSON()).to.be.an('object')
+    expect(shop).to.be.an('object')
 
     expect(shop).to.contain.property('_id')
     expect(shop).to.contain.property('name')
@@ -79,10 +40,10 @@ describe('New shop', () => {
     expect(shop.email).to.be.equal('mcdonalds@gmail.com')
     expect(shop.geo_id).to.be.equal(shopGeo._id)
     expect(shop.picUrl).to.be.equal('http://mcdonalds.com/logo')
-    // expect(shop.shop_category_id).to.be.equal(shopCategory._id)
-    // expect(shop.timeSchedule.day).to.be.equal('Lunes a viernes')
-    // expect(shop.timeSchedule.openAt).to.be.equal('9:00 a 21:00')
-    // expect(shop.delivery.active).to.be.true
+    expect(shop.shop_category_id).to.be.equal(shopCategory._id)
+    expect(shop.timeSchedule[0].day).to.be.equal('Lunes a viernes')
+    expect(shop.timeSchedule[0].openAt).to.be.equal('9:00 a 21:00')
+    expect(shop.delivery.enabled).to.be.equal(false)
     done()
     })
 })

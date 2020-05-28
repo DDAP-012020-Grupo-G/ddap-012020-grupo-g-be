@@ -1,15 +1,11 @@
 const { expect } = require('chai')
 const { describe, it, equal, to } = require('mocha')
 
-const Geo = require('../../app/models/geo.model')
+const Geo = require('../factories/geo.factory')
 
 describe('New geo', () => {
   it('should create a geo', (done) => {
-    const geo = new Geo({
-      address: "Calle falsa 123",
-      type: "CUSTOMER",
-      coordinates: [-30, -54]
-    })
+    const geo = Geo.build()
 
     expect(geo).to.be.an('object')
     expect(geo).to.contain.property('_id')
