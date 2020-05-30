@@ -15,6 +15,9 @@ const profileSchema = new Schema({
   phoneNbr: {
     type: String
   },
+  address: {
+    type: String
+  },
   geo_id: {
     type: Schema.Types.ObjectId,
     ref: 'Geo'
