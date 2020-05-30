@@ -4,7 +4,6 @@ const axios = require("axios");
 module.exports = {
   getAll,
   create,
-  update,
   getById
 }
 
@@ -30,22 +29,10 @@ async function create(geoParam) {
   }
 }
 
-async function update(shop_id, shopParam) {
-  const shop = await Shop.findById(shop_id)
-
-  // validate
-  if (!shop) throw 'Comercio no encontrado'
-  
-  // copy userParam properties to user
-  Object.assign(shop, shopParam)
-
-  await shop.save()
-}
-
 async function getById(geo_id) {
   return await Geo.findById(geo_id)
 }
 
 async function getAll() {
-  return await Shop.find()
+  return await Geo.find()
 }

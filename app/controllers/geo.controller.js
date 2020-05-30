@@ -3,6 +3,7 @@ const router = express.Router()
 const geoService = require('../services/geo.service')
 
 // routes
+router.get('/', getAll)
 router.get('/:id', getById)
 router.post('/create', create)
 
@@ -30,16 +31,9 @@ function create(req, res, next) {
     .catch((err) => next(err))
 }
 
-function update(req, res, next) {
-  shopService
-    .update(req.params.id, req.body)
-    .then(() => res.json({ message: 'Comercio modificado correctamente' }))
-    .catch((err) => next(err))
-}
-
 function getAll(req, res, next) {
-  shopService
+  geoService
     .getAll()
-    .then((shops) => res.json(shops))
+    .then((geos) => res.json(geos))
     .catch((err) => next(err))
 }
