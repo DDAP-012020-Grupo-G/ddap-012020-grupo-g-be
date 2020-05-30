@@ -17,6 +17,10 @@ const shopSchema = new Schema({
     type: String,
     required: [true, 'El email es obligatorio']
   },
+  address: {
+    type: String,
+    required: [true, 'La dirección es obligatoria']
+  },
   geo_id: {
     type: Schema.Types.ObjectId,
     ref: 'Geo'

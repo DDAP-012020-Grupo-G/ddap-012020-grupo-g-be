@@ -17,8 +17,6 @@ function jwt() {
       '/users/authenticate',
       '/users/register',
       '/shops/',
-      '/shops/add',
-      '/profiles/:id'
     ]
   })
 }

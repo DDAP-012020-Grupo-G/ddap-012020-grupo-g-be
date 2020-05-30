@@ -1,4 +1,5 @@
 const userService = require('../services/user.service')
+const geoService = require('../services/geo.service')
 
 const Profile = require('../models/profile.model')
 
@@ -31,6 +32,15 @@ async function update(user_id, profileParam) {
   // validate
   if (!profile) throw 'Perfil no encontrado'
   
+  if (profileParam.address) {
+    const geo = await geoService.create({
+      address: profileParam.address,
+      type: 'CUSTOMER'
+    })
+
+    profileParam.geo_id = geo._id
+  }
+
   // copy userParam properties to user
   Object.assign(profile, profileParam)
 

@@ -13,6 +13,7 @@
         "delete-test-and-report-folders": "rm -rf ./coverage && rm -rf ./nyc_output"
     },
     "dependencies": {
+        "axios": "^0.19.2",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
         "codacy-coverage": "^3.4.0",

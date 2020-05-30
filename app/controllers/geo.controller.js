@@ -1,30 +1,29 @@
 const express = require('express')
 const router = express.Router()
-const shopService = require('../services/shop.service')
+const geoService = require('../services/geo.service')
 
 // routes
-router.post('/add', add)
-router.get('/', getAll)
-router.get('/profile/:id', getByProfileId)
-router.put('/profile/:id', update)
+router.get('/:id', getById)
+router.post('/create', create)
 
 module.exports = router
 
-function getByProfileId(req, res, next) {
-  shopService
-    .getByProfileId(req.params.id)
-    .then((shop) => (shop ? res.json(shop) : res.sendStatus(404)))
+
+function getById(req, res, next) {
+  geoService
+    .getById(req.params.id)
+    .then((geo) => (geo ? res.json(geo) : res.sendStatus(404)))
     .catch((err) => next(err))
 }
 
-function add(req, res, next) {
-  shopService
+function create(req, res, next) {
+  geoService
     .create(req.body)
-    .then((shop) =>
-      shop ?
-      res.json(shop) :
+    .then((geo) =>
+      geo ?
+      res.json(geo) :
       res.status(400).json({
-        message: 'Comercio inválido'
+        message: 'Geo inválido'
       })
     )
     //.then(() => res.json({ message: 'Comercio registrado correctamente' }))
