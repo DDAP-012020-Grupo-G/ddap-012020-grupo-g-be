@@ -284,7 +284,6 @@ describe('DELETE /:id', () => {
 
 						authenticate({ email: 'admin@gmail.com', password: 'admin'}, (res) => {
 							const body = res.body
-							reloggedInAdminUser = body
 							
 							expect(body).to.be.an('object')
 							expect(body.message).to.be.equal('Email o contraseña inválido')
