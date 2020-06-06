@@ -13,9 +13,7 @@ describe('PUT /:user_id', () => {
 
 			authenticate(payload, (res) => {
 				const user = res.body
-				let payload = {
-						...mockProfile
-				}
+				let payload = mockProfile
 
 				update(payload, user, (res) => {
 					const body = res.body
@@ -106,9 +104,4 @@ const mockProfile = {
 	firstName: "Octavio",
 	lastName: "Gonzalez",
 	address: "Calle 354 471 Berazategui",
-}
-
-const mockShop = {
-	email: "shop@gmail.com",
-	password: "shop"
 }
