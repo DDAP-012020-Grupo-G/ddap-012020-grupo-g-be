@@ -25,12 +25,12 @@ describe('POST /register', () => {
 			const body = res.body
 
 			expect(body).to.be.an('object')
-			// expect(body).to.contain.property('message')
-			// expect(body.message).to.be.equal('Usuario registrado correctamente')
 			
 			register(payload, (res) => {
 				const body = res.body
-	
+				const status = res.status
+
+				expect(status).to.be.equal(400)	
 				expect(body).to.be.an('object')
 				expect(body).to.contain.property('message')
 				expect(body.message).to.be.equal('El email [admin@gmail.com] ya existe')
@@ -47,8 +47,6 @@ describe('POST /authenticate', () => {
 			const body = res.body
 
 			expect(body).to.be.an('object')
-			// expect(body).to.contain.property('message')
-			// expect(body.message).to.be.equal('Usuario registrado correctamente')
 			
 			let payload = {
 				email: "admin@gmail.com",
@@ -65,6 +63,47 @@ describe('POST /authenticate', () => {
 				expect(body).to.contain.property('__v')
 				expect(body).to.contain.property('token')
 
+				done()
+			})
+		})
+	})
+	it('should throw an error when trying to auth with incorrect data', (done) => {
+		payload = mockAdmin
+		register(payload, (res) => {
+			const body = res.body
+
+			expect(body).to.be.an('object')
+			
+			let payload = {
+				email: "admin@gmail.com",
+				password: ""
+			}
+			
+			authenticate(payload, (res) => {
+				const body = res.body
+				expect(body).to.be.an('object')
+				expect(body).to.contain.property('message')
+				expect(body.message).to.equal('Email o contraseña inválido')
+				done()
+			})
+		})
+	})
+	it('should throw an error when invalid payload', (done) => {
+		payload = mockAdmin
+		register(payload, (res) => {
+			const body = res.body
+
+			expect(body).to.be.an('object')
+			
+			let payload = {
+				email: "admin@gmail.com"
+			}
+			
+			authenticate(payload, (res) => {
+				const body = res.body
+				expect(body).to.be.an('object')
+				expect(body).to.contain.property('message')
+				expect(body.message).to.equal('Illegal arguments: undefined, string')
 				done()
 			})
 		})
@@ -89,7 +128,6 @@ describe('GET /current', () => {
 					.catch((err) => done(err))
 			})
 		})
-		
 	})
 
 	it('should fail when get the current user with invalid token', (done) => {
@@ -266,11 +304,12 @@ function register(payload, then) {
 		.then((res) => then(res))
 }
 
-function authenticate(payload, then) {
+function authenticate(payload, then, onFail= () => {}) {
 	request(app)
 		.post('/users/authenticate')
 		.send(payload)
 		.then((res) => then(res))
+		.catch((err) => onFail(err))
 }
 
 const mockAdmin = {

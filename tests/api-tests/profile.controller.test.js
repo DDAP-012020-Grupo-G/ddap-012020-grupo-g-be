@@ -4,7 +4,7 @@ const { describe, it, equal, to } = require('mocha')
 
 const app = require('../../app/app')
 
-describe('POST /save', () => {
+describe('PUT /:user_id', () => {
 	it('should save a profile from a recent registered user', (done) => {
 		const payload = mockCustomer
 		register(payload, (res) => {
@@ -25,28 +25,41 @@ describe('POST /save', () => {
 					expect(body.message).to.be.equal('Perfil modificado correctamente')
 					done()
 				})
-		})
+			})
 		})
 	})
 })
 
-// describe('POST /save', () => {
-// 	it('should save a profile from a recent registered user', (done) => {
-//         payload = mockCustomer
-// 		register(payload, (res) => {
-//             console.log(res.body)
-//             request(app)
-//                 .get(`/profiles/${res.body.id}`)
-//                 .then((res) => {
-//                     const body = res.body
+describe('GET /:user_id', () => {
+	it('should get the profile of a user', (done) => {
+		const payload = mockCustomer
+		register(payload, (res) => {
+			
+			let payload = mockCustomerAuth
 
-//                     expect(body).to.be.an('object')
-//                     expect(body).to.contain.property('user_id')    
-//                     done()
-//                 })
-// 		})
-// 	})
-// })
+			authenticate(payload, (res) => {
+				const user = res.body
+				let payload = {
+					...mockProfile
+				}
+				
+				update(payload, user, (res) => {
+					const body = res.body
+
+					getById(user, (res) => {
+						const body = res.body
+
+						expect(body).to.be.an('object')
+						expect(body).to.contain.property('firstName')
+						expect(body).to.contain.property('lastName')
+						expect(body).to.contain.property('address')
+						done()
+					})
+				})
+			})
+		})
+	})
+})
 
 function update(payload, user, then) {
 	request(app)
@@ -67,6 +80,13 @@ function authenticate(payload, then) {
 	request(app)
 		.post('/users/authenticate')
 		.send(payload)
+		.then((res) => then(res))
+}
+
+function getById(user, then) {
+	request(app)
+		.get(`/profiles/${user._id}`)
+		.set('Authorization', `Bearer ${user.token}`)
 		.then((res) => then(res))
 }
 

@@ -9,7 +9,6 @@ router.post('/create', create)
 
 module.exports = router
 
-
 function getById(req, res, next) {
   geoService
     .getById(req.params.id)
@@ -27,7 +26,6 @@ function create(req, res, next) {
         message: 'Geo inválido'
       })
     )
-    //.then(() => res.json({ message: 'Comercio registrado correctamente' }))
     .catch((err) => next(err))
 }
 
