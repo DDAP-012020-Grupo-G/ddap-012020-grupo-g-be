@@ -1,15 +1,8 @@
 const request = require('supertest')
 const { expect } = require('chai')
-const { before, after, describe, it, equal, to } = require('mocha')
-const db = require('../mock-db-helper')
+const { describe, it, equal, to } = require('mocha')
 
 const app = require('../../app/app')
-
-before((done) => db.connect(done))
-
-after((done) => db.close(done))
-
-beforeEach((done) => db.clean(done))
 
 describe('POST /register', () => {
 	it('should register a user', (done) => {

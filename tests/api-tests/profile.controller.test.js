@@ -1,44 +1,34 @@
 const request = require('supertest')
 const { expect } = require('chai')
-const { before, after, describe, it, equal, to } = require('mocha')
-const db = require('../mock-db-helper')
+const { describe, it, equal, to } = require('mocha')
 
 const app = require('../../app/app')
 
-before((done) => db.connect(done))
+describe('POST /save', () => {
+	it('should save a profile from a recent registered user', (done) => {
+		const payload = mockCustomer
+		register(payload, (res) => {
+			
+			let payload = mockCustomerAuth
 
-after((done) => db.close(done))
+			authenticate(payload, (res) => {
+				const user = res.body
+				let payload = {
+						...mockProfile
+				}
 
-beforeEach((done) => db.clean(done))
+				update(payload, user, (res) => {
+					const body = res.body
 
-// describe('POST /save', () => {
-// 	it('should save a profile from a recent registered user', (done) => {
-//         payload = mockCustomer
-// 		register(payload, (res) => {
-// 			let payload = {
-// 				username: "customer",
-// 				password: "customer"
-// 			}
-
-// 			authenticate(payload, (res) => {
-// 				const body = res.body
-//                 let payload = {
-//                     ...mockProfile,
-//                     token : body.token
-//                 }
-
-//                 save(payload, (res) => {
-//                     const body = res.body
-        
-//                     expect(body).to.be.an('object')
-//                     expect(body).to.contain.property('message')
-//                     expect(body.message).to.be.equal('Perfil guardado correctamente')
-//                     done()
-//                 })
-//             })
-// 		})
-// 	})
-// })
+					expect(body).to.be.an('object')
+					expect(body).to.contain.property('message')
+					expect(body.message).to.be.equal('Perfil modificado correctamente')
+					done()
+				})
+		})
+		})
+	})
+})
 
 // describe('POST /save', () => {
 // 	it('should save a profile from a recent registered user', (done) => {
@@ -58,10 +48,10 @@ beforeEach((done) => db.clean(done))
 // 	})
 // })
 
-function save(payload, then) {
+function update(payload, user, then) {
 	request(app)
-        .post('/profiles/save')
-        .set('Authorization', `Bearer ${token}`)
+        .put(`/profiles/${user._id}`)
+        .set('Authorization', `Bearer ${user.token}`)
 		.send(payload)
 		.then((res) => then(res))
 }
@@ -81,14 +71,21 @@ function authenticate(payload, then) {
 }
 
 const mockCustomer = {
+	firstName: "Customer",
+	lastName: "1",
+	email: "customer@gmail.com",
+	password: "customer"
+}
+
+const mockCustomerAuth = {
 	email: "customer@gmail.com",
 	password: "customer"
 }
 
 const mockProfile = {
-	firstName: "octavio",
-	lastName: "gonzalez",
-	address: "address",
+	firstName: "Octavio",
+	lastName: "Gonzalez",
+	address: "Mitre 914",
 }
 
 const mockShop = {
