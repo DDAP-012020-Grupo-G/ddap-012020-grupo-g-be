@@ -42,7 +42,7 @@ describe('POST /register', () => {
 
 describe('POST /authenticate', () => {
 	it('should authenticate the user', (done) => {
-		payload = mockAdmin
+		let payload = mockAdmin
 		register(payload, (res) => {
 			const body = res.body
 
@@ -68,7 +68,7 @@ describe('POST /authenticate', () => {
 		})
 	})
 	it('should throw an error when trying to auth with incorrect data', (done) => {
-		payload = mockAdmin
+		let payload = mockAdmin
 		register(payload, (res) => {
 			const body = res.body
 
@@ -89,7 +89,7 @@ describe('POST /authenticate', () => {
 		})
 	})
 	it('should throw an error when invalid payload', (done) => {
-		payload = mockAdmin
+		let payload = mockAdmin
 		register(payload, (res) => {
 			const body = res.body
 
@@ -245,7 +245,7 @@ describe('PUT /:id', () => {
 
 						authenticate({ email: 'admin@gmail.com', password: 'admin'}, (res) => {
 							const body = res.body
-							reloggedInAdminUser = body
+							let reloggedInAdminUser = body
 							
 							expect(body).to.be.an('object')
 							expect(loggedInAdminUser._id).to.be.equal(reloggedInAdminUser._id)
