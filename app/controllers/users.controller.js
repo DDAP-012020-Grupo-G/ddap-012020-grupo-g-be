@@ -32,7 +32,6 @@ function register(req, res, next) {
         ? res.json(user)
         : res.status(400).json({ message: 'Email o contraseña inválido' })
     )
-    //.then(() => res.json({ message: 'Usuario registrado correctamente' }))
     .catch((err) => next(err))
 }
 

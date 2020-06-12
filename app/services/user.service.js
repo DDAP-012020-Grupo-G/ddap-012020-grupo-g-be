@@ -41,7 +41,7 @@ async function existsUserWithEmail(email) {
 
 async function create(userParam) {
   // validate
-  if (await this.existsUserWithEmail(userParam.email)) {
+  if (await existsUserWithEmail(userParam.email)) {
     throw 'El email [' + userParam.email + '] ya existe'
   }
 
