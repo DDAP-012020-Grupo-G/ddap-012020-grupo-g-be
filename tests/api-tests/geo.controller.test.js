@@ -26,26 +26,6 @@ describe('POST /create', () => {
             })
         })
     })
-    it('should not create a geo if it is invalid', (done) => {
-		const payload = mockCustomer
-		register(payload, (res) => {
-			
-			let payload = mockCustomerAuth
-
-			authenticate(payload, (res) => {
-                let user = res.body
-				let payload = mockInvalidGeo
-                
-                create(payload, user, (res) => {
-                    const body = res.body
-                    expect(body).to.be.an('object')
-                    expect(body).to.contain.property('message')
-                    expect(body.message).to.be.equal('Dirección inválida')
-                    done()
-                })
-            })
-        })
-    })
 })
 
 describe('GET /', () => {
