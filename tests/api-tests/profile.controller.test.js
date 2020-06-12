@@ -50,7 +50,6 @@ describe('GET /:user_id', () => {
 						expect(body).to.be.an('object')
 						expect(body).to.contain.property('firstName')
 						expect(body).to.contain.property('lastName')
-						expect(body).to.contain.property('address')
 						done()
 					})
 				})
