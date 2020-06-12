@@ -6,6 +6,7 @@ const app = require('../../app/app')
 
 describe('POST /create', () => {
     it('should create a geo', (done) => {
+        this.timeout(15000);
 		const payload = mockCustomer
 		register(payload, (res) => {
 			
@@ -26,10 +27,32 @@ describe('POST /create', () => {
             })
         })
     })
+    it('should not create a geo if it is invalid', (done) => {
+        this.timeout(15000);
+		const payload = mockCustomer
+		register(payload, (res) => {
+			
+			let payload = mockCustomerAuth
+
+			authenticate(payload, (res) => {
+                let user = res.body
+				let payload = mockInvalidGeo
+                
+                create(payload, user, (res) => {
+                    const body = res.body
+                    expect(body).to.be.an('object')
+                    expect(body).to.contain.property('message')
+                    expect(body.message).to.be.equal('Dirección inválida')
+                    done()
+                })
+            })
+        })
+    })
 })
 
 describe('GET /', () => {
     it('should get all geos', (done) => {
+        this.timeout(15000);
 		const payload = mockCustomer
 		register(payload, (res) => {
 			
@@ -54,6 +77,7 @@ describe('GET /', () => {
 
 describe('GET /:geo_id', () => {
     it('should find a geo by id', (done) => {
+        this.timeout(15000);
 		const payload = mockCustomer
 		register(payload, (res) => {
 			
