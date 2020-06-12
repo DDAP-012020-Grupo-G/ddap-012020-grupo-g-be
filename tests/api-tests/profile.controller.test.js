@@ -101,6 +101,5 @@ const mockCustomerAuth = {
 
 const mockProfile = {
 	firstName: "Octavio",
-	lastName: "Gonzalez",
-	address: "Calle 354 471 Berazategui"
+	lastName: "Gonzalez"
 }
