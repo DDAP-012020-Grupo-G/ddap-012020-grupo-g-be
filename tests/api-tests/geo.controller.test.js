@@ -155,5 +155,5 @@ const mockGeo = {
 
 const mockInvalidGeo = {
     address: '??xwww asd',
-    type: 'NADA'
+    type: 'CUSTOMER'
 }
