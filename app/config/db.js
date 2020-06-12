@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
-let urlDB = 'mongodb://localhost:27017/realml-be'
+let urlDB;
 
 if (process.env.NODE_ENV === 'dev') {
-  urlDB = 'mongodb://localhost:27017/realml-be'
+  urlDB = 'mongodb://localhost:27017/abastify-be'
 } else {
   urlDB = process.env.MONGODB_URI
 }

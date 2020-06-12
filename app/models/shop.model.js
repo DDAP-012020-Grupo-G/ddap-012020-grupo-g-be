@@ -9,6 +9,12 @@ const shopSchema = new Schema({
     type: String,
     required: [true, 'El nombre es obligatorio']
   },
+  desc: {
+    type: String
+  },
+  rating: {
+    type: Number
+  },
   phoneNbr: {
     type: String,
     required: [true, 'El numero de telefono es obligatorio']
@@ -17,11 +23,18 @@ const shopSchema = new Schema({
     type: String,
     required: [true, 'El email es obligatorio']
   },
+  address: {
+    type: String,
+    required: [true, 'La dirección es obligatoria']
+  },
   geo_id: {
     type: Schema.Types.ObjectId,
     ref: 'Geo'
   },
   picUrl: {
+    type: String
+  },
+  color: {
     type: String
   },
   shop_category_id: {
