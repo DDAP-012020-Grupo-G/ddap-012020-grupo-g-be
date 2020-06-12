@@ -15,14 +15,16 @@ describe('PUT /:user_id', () => {
 				const user = res.body
 				let payload = mockProfile
 
-				update(payload, user, (res) => {
-					const body = res.body
-
-					expect(body).to.be.an('object')
-					expect(body).to.contain.property('message')
-					expect(body.message).to.be.equal('Perfil modificado correctamente')
-					done()
-				})
+				setTimeout(() => {
+					update(payload, user, (res) => {
+						const body = res.body
+	
+						expect(body).to.be.an('object')
+						expect(body).to.contain.property('message')
+						expect(body.message).to.be.equal('Perfil modificado correctamente')
+						done()
+					})
+				}, 10000)
 			})
 		})
 	})
@@ -41,18 +43,21 @@ describe('GET /:user_id', () => {
 					...mockProfile
 				}
 				
-				update(payload, user, (res) => {
-					const body = res.body
-
-					getById(user, (res) => {
+				setTimeout(() => {
+					update(payload, user, (res) => {
 						const body = res.body
-
-						expect(body).to.be.an('object')
-						expect(body).to.contain.property('firstName')
-						expect(body).to.contain.property('lastName')
-						done()
+	
+						getById(user, (res) => {
+							const body = res.body
+	
+							expect(body).to.be.an('object')
+							expect(body).to.contain.property('firstName')
+							expect(body).to.contain.property('lastName')
+							expect(body).to.contain.property('address')
+							done()
+						})
 					})
-				})
+				}, 10000)
 			})
 		})
 	})
@@ -101,5 +106,6 @@ const mockCustomerAuth = {
 
 const mockProfile = {
 	firstName: "Octavio",
-	lastName: "Gonzalez"
+	lastName: "Gonzalez",
+	address: "Calle 354 471 Berazategui",
 }

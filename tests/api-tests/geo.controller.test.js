@@ -6,7 +6,6 @@ const app = require('../../app/app')
 
 describe('POST /create', () => {
     it('should create a geo', (done) => {
-        this.timeout(15000);
 		const payload = mockCustomer
 		register(payload, (res) => {
 			
@@ -28,7 +27,6 @@ describe('POST /create', () => {
         })
     })
     it('should not create a geo if it is invalid', (done) => {
-        this.timeout(15000);
 		const payload = mockCustomer
 		register(payload, (res) => {
 			
@@ -37,14 +35,15 @@ describe('POST /create', () => {
 			authenticate(payload, (res) => {
                 let user = res.body
 				let payload = mockInvalidGeo
-                
-                create(payload, user, (res) => {
-                    const body = res.body
-                    expect(body).to.be.an('object')
-                    expect(body).to.contain.property('message')
-                    expect(body.message).to.be.equal('Dirección inválida')
-                    done()
-                })
+                setTimeout(() => {
+                    create(payload, user, (res) => {
+                        const body = res.body
+                        expect(body).to.be.an('object')
+                        expect(body).to.contain.property('message')
+                        expect(body.message).to.be.equal('Dirección inválida')
+                        done()
+                    })
+                }, 10000)
             })
         })
     })
@@ -52,7 +51,6 @@ describe('POST /create', () => {
 
 describe('GET /', () => {
     it('should get all geos', (done) => {
-        this.timeout(15000);
 		const payload = mockCustomer
 		register(payload, (res) => {
 			
@@ -62,14 +60,16 @@ describe('GET /', () => {
                 let user = res.body
 				let payload = mockGeo
                 
-                create(payload, user, (res) => {
-                    getAll(user, (res) => {
-                        const body = res.body
-                        expect(body).to.be.an('array')
-                        expect(body.length).to.be.equal(1)
-                        done()
+                setTimeout(() => {
+                    create(payload, user, (res) => {
+                        getAll(user, (res) => {
+                            const body = res.body
+                            expect(body).to.be.an('array')
+                            expect(body.length).to.be.equal(1)
+                            done()
+                        })
                     })
-                })
+                }, 10000)
             })
         })
     })
@@ -77,7 +77,6 @@ describe('GET /', () => {
 
 describe('GET /:geo_id', () => {
     it('should find a geo by id', (done) => {
-        this.timeout(15000);
 		const payload = mockCustomer
 		register(payload, (res) => {
 			
@@ -87,18 +86,20 @@ describe('GET /:geo_id', () => {
                 let user = res.body
 				let payload = mockGeo
                 
-                create(payload, user, (res) => {
-                    let geo = res.body
-                    getById(geo, user, (res) => {
-                        const body = res.body
-                        expect(body).to.be.an('object')
-                        expect(body).to.contain.property('_id')
-                        expect(body).to.contain.property('address')
-                        expect(body).to.contain.property('type')
-                        expect(body).to.contain.property('coordinates')
-                        done()
+                setTimeout(() => {
+                    create(payload, user, (res) => {
+                        let geo = res.body
+                        getById(geo, user, (res) => {
+                            const body = res.body
+                            expect(body).to.be.an('object')
+                            expect(body).to.contain.property('_id')
+                            expect(body).to.contain.property('address')
+                            expect(body).to.contain.property('type')
+                            expect(body).to.contain.property('coordinates')
+                            done()
+                        })
                     })
-                })
+                }, 10000)
             })
         })
     })
@@ -158,6 +159,6 @@ const mockGeo = {
 }
 
 const mockInvalidGeo = {
-    address: '??xwww asd',
+    address: '??!"#%!"#!"',
     type: 'CUSTOMER'
 }
