@@ -25,6 +25,7 @@ async function create(geoParam) {
 
     return geo
   } catch (error) {
+    console.log(error)
     throw 'Dirección inválida'
   }
 }
