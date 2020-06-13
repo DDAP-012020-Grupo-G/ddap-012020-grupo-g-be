@@ -5,10 +5,20 @@ const shopService = require('../services/shop.service')
 // routes
 router.post('/add', add)
 router.get('/', getAll)
+router.get('/:shop_id', getById)
 router.get('/profile/:profile_id', getByProfileId)
 router.put('/profile/:shop_id', update)
 
 module.exports = router
+
+function getById(req, res, next) {
+  shopService
+    .getById(req.params.shop_id)
+    .then((shop) => {
+        (shop ? res.json(shop) : res.sendStatus(404))
+    })
+    .catch((err) => next(err))
+}
 
 function getByProfileId(req, res, next) {
   shopService
