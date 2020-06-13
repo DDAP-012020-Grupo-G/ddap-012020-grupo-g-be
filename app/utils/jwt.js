@@ -17,6 +17,9 @@ function jwt() {
       '/users/authenticate',
       '/users/register',
       '/shops/',
+      /\/shops/i,
+      '/products/',
+      /\/products\/shop/i,
     ]
   })
 }
