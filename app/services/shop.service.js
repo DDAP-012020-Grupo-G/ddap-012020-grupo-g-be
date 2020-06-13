@@ -2,6 +2,7 @@ const Shop = require('../models/shop.model')
 
 module.exports = {
   getAll,
+  getById,
   create,
   update,
   getByProfileId
@@ -31,6 +32,10 @@ async function getByProfileId(profile_id) {
   return await Shop.findOne({
     profile_id: profile_id
   })
+}
+
+async function getById(shop_id) {
+  return await Shop.findById(shop_id)
 }
 
 async function getAll() {
