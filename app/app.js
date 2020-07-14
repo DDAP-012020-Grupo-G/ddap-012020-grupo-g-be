@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const jwt = require('./utils/jwt')
 const cors = require('cors')
 const path = require('path')
+require('./utils/log4js')
 
 const express = require('express')
 const app = express()

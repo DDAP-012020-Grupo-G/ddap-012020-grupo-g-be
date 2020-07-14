@@ -1,7 +1,8 @@
 ﻿const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const profileService = require('../services/profile.service')
-
+const log4js = require('log4js')
+const logger = log4js.getLogger('services')
 const User = require('../models/user.model')
 
 module.exports = {
@@ -20,6 +21,7 @@ async function authenticate({ email, password }) {
     const token = jwt.sign({ sub: user.id }, process.env.TOKEN, {
       expiresIn: process.env.TOKEN_TIMEOUT
     })
+    logger.info(`User with email ${email} logged in succesfully.`)
     return {
       ...userWithoutHash,
       token
@@ -42,9 +44,9 @@ async function existsUserWithEmail(email) {
 async function create(userParam) {
   // validate
   if (await existsUserWithEmail(userParam.email)) {
+    logger.error(`Attempt to register account with email ${userParam.email} but an account with that email already exists.`)
     throw 'El email [' + userParam.email + '] ya existe'
   }
-
   if (!userParam.password) {
     throw 'La contraseña es requerida'
   }
@@ -55,7 +57,6 @@ async function create(userParam) {
   if (userParam.password) {
     user.hash = bcrypt.hashSync(userParam.password, 10)
   }
-
   await user.save()
 
   await profileService.create({
@@ -63,7 +64,7 @@ async function create(userParam) {
     firstName: userParam.firstName,
     lastName: userParam.lastName
   })
-
+  logger.info(`Created a new account with email ${userParam.email}.`)
   return user
 }
 
@@ -84,7 +85,8 @@ async function update(id, userParam) {
   // copy userParam properties to user
   Object.assign(user, userParam)
 
-  await user.save()
+  await user.save() 
+  logger.info(`Account with email ${userParam.email} has updated its data.`)
 }
 
 async function _delete(id) {
