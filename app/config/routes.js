@@ -5,4 +5,5 @@ function configureRoutes(app) {
   app.use('/shops', require('../controllers/shops.controller'))
   app.use('/products', require('../controllers/products.controller'))
   app.use('/geo', require('../controllers/geo.controller'))
+  app.use('/orders', require('../controllers/orders.controller'))
 }

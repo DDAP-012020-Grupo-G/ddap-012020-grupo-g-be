@@ -20,7 +20,8 @@ describe('New order', () => {
 
         const order = Order.build({
             profile_id: profile._id,
-            cart: [{
+            shop_id: shop._id,
+            products: [{
                 product_id: product._id,
                 quantity: 5
             }]
@@ -30,7 +31,8 @@ describe('New order', () => {
 
         expect(order).to.contain.property('_id')
         expect(order).to.contain.property('profile_id')
-        expect(order).to.contain.property('cart')
+        expect(order).to.contain.property('shop_id')
+        expect(order).to.contain.property('products')
         expect(order).to.contain.property('price')
 
         done()
