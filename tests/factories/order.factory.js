@@ -6,7 +6,8 @@ const Order = Factory.define('order', OrderModel)
     .sequence('_id')
     .attrs({
         profile_id: 1,
-        cart: [{
+        shop_id: 1,
+        products: [{
             product_id: 1,
             quantity: 5
         }],

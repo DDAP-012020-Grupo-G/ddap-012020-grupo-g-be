@@ -10,6 +10,7 @@ module.exports = {
   getAll,
   getById,
   create,
+  existsUserWithEmail,
   update,
   delete: _delete
 }
