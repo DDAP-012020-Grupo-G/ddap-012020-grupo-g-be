@@ -1,4 +1,6 @@
 const Order = require('../models/order.model')
+const log4js = require('log4js')
+const logger = log4js.getLogger('services')
 
 module.exports = {
   create,
@@ -19,6 +21,7 @@ async function create(orderParam) {
 
     // save order
     await order.save()
+    logger.info(`Profile with id ${order.profile_id} has made an order to shop with id ${shop._id}.`)
   })
 
   
@@ -27,5 +30,6 @@ async function create(orderParam) {
 
 
 async function getAll() {
+
   return await Order.find()
 }
