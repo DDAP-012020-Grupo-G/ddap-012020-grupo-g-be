@@ -34,7 +34,7 @@ describe('POST /create', () => {
 
 			authenticate(payload, (res) => {
                 let user = res.body
-				let payload = mockInvalidGeo
+                let payload = mockInvalidGeo
                 setTimeout(() => {
                     create(payload, user, (res) => {
                         const body = res.body
