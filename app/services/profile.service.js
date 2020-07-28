@@ -2,8 +2,6 @@ const userService = require('../services/user.service')
 const geoService = require('../services/geo.service')
 
 const Profile = require('../models/profile.model')
-const log4js = require ('log4js')
-const logger = log4js.getLogger('services')
 
 module.exports = {
   getByUserId,
@@ -12,8 +10,6 @@ module.exports = {
 }
 
 async function getByUserId(user_id) {
-  
-  logger.info(`Fetching profile of user with id ${user_id}.`)
   return await Profile.findOne({
     user_id: user_id
   })
@@ -28,8 +24,6 @@ async function create({ user_id, firstName, lastName}) {
 
   // save profile
   await profile.save()
-  
-  logger.info(`Created a new profile for ${firstName} ${lastName}. (ID: ${user_id})`)
 }
 
 async function update(user_id, profileParam) {
@@ -51,5 +45,4 @@ async function update(user_id, profileParam) {
   Object.assign(profile, profileParam)
 
   await profile.save()
-  logger.info(`User with id ${user_id} has updated its profile data.`)
 }
