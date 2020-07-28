@@ -13,6 +13,7 @@ async function create(productParam) {
 
   // save product
   await product.save()
+  
   return product
 }
 
@@ -29,6 +30,7 @@ async function update(product_id, productParam) {
 }
 
 async function getAll() {
+  
   return await Product.find()
 }
 

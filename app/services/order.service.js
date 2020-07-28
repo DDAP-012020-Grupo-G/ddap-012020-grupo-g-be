@@ -27,5 +27,6 @@ async function create(orderParam) {
 
 
 async function getAll() {
+
   return await Order.find()
 }

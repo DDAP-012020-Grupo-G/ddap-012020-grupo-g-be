@@ -1,7 +1,6 @@
 ﻿const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const profileService = require('../services/profile.service')
-
 const User = require('../models/user.model')
 
 module.exports = {
@@ -45,7 +44,6 @@ async function create(userParam) {
   if (await existsUserWithEmail(userParam.email)) {
     throw 'El email [' + userParam.email + '] ya existe'
   }
-
   if (!userParam.password) {
     throw 'La contraseña es requerida'
   }
@@ -56,7 +54,6 @@ async function create(userParam) {
   if (userParam.password) {
     user.hash = bcrypt.hashSync(userParam.password, 10)
   }
-
   await user.save()
 
   await profileService.create({
@@ -64,7 +61,6 @@ async function create(userParam) {
     firstName: userParam.firstName,
     lastName: userParam.lastName
   })
-
   return user
 }
 
@@ -85,7 +81,7 @@ async function update(id, userParam) {
   // copy userParam properties to user
   Object.assign(user, userParam)
 
-  await user.save()
+  await user.save() 
 }
 
 async function _delete(id) {

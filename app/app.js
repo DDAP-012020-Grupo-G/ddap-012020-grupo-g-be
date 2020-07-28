@@ -1,4 +1,5 @@
 const errorHandler = require('./utils/error-handler')
+const loggerHandler = require('./utils/logger')
 const configureRoutes = require('./config/routes')
 const bodyParser = require('body-parser')
 const jwt = require('./utils/jwt')
@@ -22,6 +23,8 @@ app.get('/', function (req, res) {
 
 // use JWT auth to secure the api
 app.use(jwt())
+
+app.use(loggerHandler())
 
 // api routes
 configureRoutes(app)
