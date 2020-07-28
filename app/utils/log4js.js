@@ -10,3 +10,5 @@ const logger = log4js.getLogger('services');
 logger.level = 'INFO';
 
 logger.info('Server is now on.');
+
+module.exports = logger
