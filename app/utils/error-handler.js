@@ -17,8 +17,11 @@ function errorHandler(err, req, res, next) {
   }
 
   if (err.name === 'CastError') {
-    // jwt authentication error
     res.status(404).json({ message: 'No se ha encontrado el objeto solicitado' })
+  }
+
+  if (err.name === 'Error') {
+    res.status(400).json({ message: err.message })
   }
 
   // default to 500 server error
